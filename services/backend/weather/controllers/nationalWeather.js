@@ -1,7 +1,7 @@
 const express = require('express');
 const NationalWeatherRouter = express.Router();
 const axios = require('axios');
-const apiAdapter = require('../routes/apiAdapter');
+const apiAdapter = require('../services/apiAdapterService');
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -44,6 +44,7 @@ NationalWeatherRouter.get(`/national/${testLocation}/forecast`, (req, res) => {
         res.status(200).json({
             message: 'Success!',
             updatedAt: formatAMPM(),
+            nationalWeatherServiceLive: api,
             forecast: data.properties.periods
         })
     })
