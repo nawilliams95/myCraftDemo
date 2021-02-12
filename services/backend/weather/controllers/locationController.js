@@ -21,7 +21,7 @@ class LocationController {
     }
 
     static async addLocation(req, res) {
-        if (!req.body.cityName || !req.body.state || !req.body.timeZone || !req.body.long || !req.body.gridID || !req.body.gridX || !req.body.gridY) {
+        if (!req.body.cityName || !req.body.state || !req.body.timeZone || !req.body.lat || !req.body.long || !req.body.gridID || !req.body.gridX || !req.body.gridY) {
             util.setErr(400, 'Please provide complete details. All fields are required');
             return util.send(res);
         }
@@ -141,4 +141,4 @@ class LocationController {
     }
 }
 
-export default LocationController; 
+module.exports = LocationController; 

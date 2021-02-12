@@ -110,4 +110,4 @@ class LocationService {
 
 }
 
-export default LocationService;
+module.exports = LocationService;

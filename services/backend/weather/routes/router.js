@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router()
 const nationalWeatherService = require('../controllers/nationalWeather');
+const LocationRouter = require('./locationRouter');
 
 router.use((req, res, next) => {
     console.log("Called: ", req.path)
@@ -8,5 +9,7 @@ router.use((req, res, next) => {
 })
 
 router.use(nationalWeatherService);
+router.use(LocationRouter);
 
-module.exports = router
+
+ module.exports = router;
