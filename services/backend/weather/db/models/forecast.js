@@ -29,5 +29,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   });
+
+  Forecast.associate = models => {
+    Forecast.belongsTo(models.Location);
+  };
+  
   return Forecast;
 }

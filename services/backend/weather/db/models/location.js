@@ -33,5 +33,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
  });
+
+ Location.associate = models => {
+   Location.hasMany(models.Forecast);
+ };
+ 
  return Location;
 };
