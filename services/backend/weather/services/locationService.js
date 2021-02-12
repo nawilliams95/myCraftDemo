@@ -50,7 +50,7 @@ class LocationService {
         }
     }
 
-    static async getALocationByName(cityName) {
+    static async getLocationByName(cityName) {
         try {
             const namedLocation = await db.Location.findOne({
                 where: {

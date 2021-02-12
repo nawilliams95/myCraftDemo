@@ -13,7 +13,7 @@ class Util {
         this.type = 'success';
     }
 
-    setError(statusCode, message) {
+    setErr(statusCode, message) {
         this.statusCode = statusCode;
         this.message = message;
         this.type = 'error';
