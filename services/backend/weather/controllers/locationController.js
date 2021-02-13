@@ -109,7 +109,7 @@ class LocationController {
         try {
             const locationToDelete = await LocationService.deleteLocation(id);
             if (locationToDelete) {
-                util.setSuccess(200, 'Say bye-bye-bye...Location has been deleted...forever!!!');
+                util.setSuccess(204, 'Say bye-bye-bye...Location has been deleted...forever!!!');
             } else {
                 util.setErr(404, `Ummm... the Location with the id ${id} could not be found...do you need help??`)
             }
@@ -129,7 +129,7 @@ class LocationController {
         try {
             const locationToDelete = await LocationService.deleteLocationByName(cityName);
             if (locationToDelete) {
-                util.setSuccess(200, 'Its hard to say good-bye... actually its not! Location has been deleted...forever!!!');
+                util.setSuccess(204, 'Its hard to say good-bye... actually its not! Location has been deleted...forever!!!');
             } else {
                 util.setErr(404, `Ummm... the Location with the city name ${cityName} could not be found...do you need help??`)
             }

@@ -41,3 +41,5 @@ app.use('/api', router);
 app.listen(PORT, () => {
     console.log(`Big Brother is listening.....on PORT ${PORT}`);
 }); //listens  for port connection and lets me know if my server is running on the propper port. 
+
+module.exports = app;
