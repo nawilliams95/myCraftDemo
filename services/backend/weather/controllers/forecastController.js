@@ -80,10 +80,10 @@ class ForecastController {
     static async getAllForecastOfLocation(req, res) {
         const { LocationId } = req.params;
 
-        // if(!Number(locationId)) {
-        //     util.setErr(400, 'Please input a valid LocationID.... I mean seriously?');
-        //     return util.send(res);
-        // }
+        if(!Number(LocationId)) {
+            util.setErr(400, 'Please input a valid LocationID.... I mean seriously?');
+            return util.send(res);
+        }
         try {
             const theLocationForecasts = await ForecastService.getAllForecastOfLocation(LocationId);
             if(!theLocationForecasts) {

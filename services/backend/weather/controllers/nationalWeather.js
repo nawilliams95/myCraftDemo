@@ -2,27 +2,31 @@ const express = require('express');
 const NationalWeatherRouter = express.Router();
 const axios = require('axios');
 const apiAdapter = require('../services/apiAdapterService');
-const LocationService = require('../services/locationService');
-const ForecastService = require('../services/forecastService');
 const dotenv = require('dotenv');
+
+
 dotenv.config();
 
-
-
-
-//TEMPORAY TEST VERIABLES FOR CONNECTING TO THE WEATHER SERVICE// 
-
-
-const testLocation = 'Mountain-View'
-const testGridID = 'MTR'
-const testGridX = 96
-const testGridY = 108
-//=======================================//
-
 const BASE_URL = process.env.NATIONAL_WEATHER_SERVICE_URL
-// const api = apiAdapter(BASE_URL, testGridID, testGridX, testGridY);
-const locationidApi = 'http://localhost:8000/api/test';
-const forecastaApi = 'http://localhost:8000/api/forecasts';
+const locationidApi = process.env.LOCATION_ID_URL;
+const forecastaApi = process.env.FORECAST_URL;
+/* 
+ the National weather service api call. setup to operate as a scheduled as a function to run 2x's daily. It works along with 3 other helper/callback functions as well as 2 small converter functions. it currently hit the location id roue andd gets all location id info. the cycles through each on for and plugs it into the api url for the national weather service. it then takes the forcast info it gets from that call and stores it in a variable then loops through that info and configures it for our foecast api. and finally it then goes through and stores it via POST req to our api. Wheewwhh lol. all route have been tested and run. I will now add in chron job and the delete call.
+
+*/
+
+
+
+////////////////////////////////
+///THE MAIN FUNCTION 
+///////////////////////////////
+
+// getLocationIds();
+
+
+//////////////////////////////////////
+//DATE AND TIME HELPERS
+////////////////////////////////////
 
 const formatAMPM = () => {
     var date = new Date();
@@ -37,7 +41,6 @@ const formatAMPM = () => {
     return strTime;
 }
 
-//^^time helper function 
 
 function dateConverter(currentdate) {
     date = new Date(currentdate);
@@ -55,7 +58,10 @@ function dateConverter(currentdate) {
     return year + '-' + month + '-' + dt;
 }
 
-//=============================================================================
+/////////////////////////////////////
+//FORECAST HELPER FUNCTIONS
+////////////////////////////////////
+
 const getLocationIds = async () => {
     try {
         const response = await axios.get(locationidApi);
@@ -107,23 +113,6 @@ const sendForecasts = async (data, id) => {
     }
 }
 
-// getLocationIds();
 
-///////////////////////////
-//INDEX
-//////////////////////////
-
-
-// NationalWeatherRouter.get(`/national/${testLocation}/forecast`, (req, res) => {
-//     axios.get(api).then(resp => {
-//         const data = resp.data
-//         res.status(200).json({
-//             message: 'Success!',
-//             updatedAt: formatAMPM(),
-//             nationalWeatherServiceLive: api,
-//             forecast: data.properties.periods
-//         })
-//     })
-// })
 
 module.exports = NationalWeatherRouter
