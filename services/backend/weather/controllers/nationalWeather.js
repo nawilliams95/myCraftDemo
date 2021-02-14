@@ -1,4 +1,5 @@
 const express = require('express');
+const schedule = require('node-schedule');
 const NationalWeatherRouter = express.Router();
 const axios = require('axios');
 const apiAdapter = require('../services/apiAdapterService');
@@ -7,9 +8,10 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const BASE_URL = process.env.NATIONAL_WEATHER_SERVICE_URL
+const BASE_URL = process.env.NATIONAL_WEATHER_SERVICE_URL;
 const locationidApi = process.env.LOCATION_ID_URL;
 const forecastaApi = process.env.FORECAST_URL;
+const DELETE_URL = process.env.DELETE_URL;
 /* 
  the National weather service api call. setup to operate as a scheduled as a function to run 2x's daily. It works along with 3 other helper/callback functions as well as 2 small converter functions. it currently hit the location id roue andd gets all location id info. the cycles through each on for and plugs it into the api url for the national weather service. it then takes the forcast info it gets from that call and stores it in a variable then loops through that info and configures it for our foecast api. and finally it then goes through and stores it via POST req to our api. Wheewwhh lol. all route have been tested and run. I will now add in chron job and the delete call.
 
@@ -18,10 +20,23 @@ const forecastaApi = process.env.FORECAST_URL;
 
 
 ////////////////////////////////
-///THE MAIN FUNCTION 
+///THE MAIN FUNCTION/ TIMER
 ///////////////////////////////
 
-// getLocationIds();
+const rule = new schedule.RecurrenceRule();
+rule.hour = 0;
+rule.minute = 2;
+rule.tz = 'America/New_York'
+
+const dailyPull = schedule.scheduleJob(rule, function() {
+    console.log('fetching new forecasts at: ' + formatAMPM());
+    getLocationIds();
+});
+
+
+
+
+
 
 
 //////////////////////////////////////
@@ -80,6 +95,7 @@ const getLocationIds = async () => {
 }
 
 const getForecastData = async (api, id) => {
+    deleteForecasts(id);
     try {
         const response2 = await axios.get(api);
         const data = response2.data;
@@ -108,6 +124,16 @@ const sendForecasts = async (data, id) => {
         });
         const data3 = response3.data;
         console.log(data3)
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+const deleteForecasts = async (id) => {
+    try {
+        const response = await axios.delete(`${DELETE_URL}/${id}`);
+        const result = response.data;
+        console.log(result);
     } catch (err) {
         console.error(err)
     }

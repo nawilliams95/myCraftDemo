@@ -7,6 +7,6 @@ ForecastRouter.post('/forecasts', ForecastController.addForecast);
 ForecastRouter.get('/forecasts/:id', ForecastController.getAForecast);
 ForecastRouter.get('/forecast/:LocationId', ForecastController.getAllForecastOfLocation);
 ForecastRouter.put('/forecasts/:id', ForecastController.updatForecast );
-ForecastRouter.delete('/forcast/:LocationId', ForecastController.deleteAllForecasts);
+ForecastRouter.delete('/forecast/:LocationId', ForecastController.deleteAllForecasts);
 
 module.exports = ForecastRouter;
