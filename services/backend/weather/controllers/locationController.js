@@ -20,6 +20,21 @@ class LocationController {
         }
     }
 
+    static async getAllLocatinIds(req, res) {
+        try {
+            const allLocationIds = await LocationService.getAllLocationIds();
+            if (allLocationIds.length > 0) {
+                util.setSuccess(200, 'All Location IDs have been successfully retrieved! Whoo-hoo!', allLocationIds);
+            } else {
+                util.setSuccess(200, 'Good, you made it here but.... there are NO LOCATION IDs FOUND');
+            }
+            console.log('Success')
+            return util.send(res);
+        } catch (err) {
+            throw err;
+        }
+    }
+
     static async addLocation(req, res) {
         if (!req.body.cityName || !req.body.state || !req.body.timeZone || !req.body.lat || !req.body.long || !req.body.gridID || !req.body.gridX || !req.body.gridY) {
             util.setErr(400, 'Please provide complete details. All fields are required');

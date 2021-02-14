@@ -9,7 +9,7 @@ class ForecastService {
         }
     }
 
-    static async addForecast() {
+    static async addForecast(newForecast) {
         try {
             return await db.Forecast.create(newForecast);
         } catch (err) {

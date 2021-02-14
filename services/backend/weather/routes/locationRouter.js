@@ -10,4 +10,6 @@ LocationRouter.put('/locations/:id', LocationController.updateLocation);
 LocationRouter.delete('/locations/:id', LocationController.deleteLocation);
 LocationRouter.delete('/location/:cityName', LocationController.deleteLocationByName);
 
+LocationRouter.get('/test', LocationController.getAllLocatinIds);
+
 module.exports = LocationRouter;

@@ -19,6 +19,13 @@ class Util {
         this.type = 'error';
     }
 
+    getLocationInfo() {
+        const locationInfo = {
+            locationInfo: this.data
+        };
+        return locationInfo;
+    }
+
     send(res) {
         const result = {
             status: this.type,

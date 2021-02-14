@@ -17,6 +17,22 @@ class LocationService {
         }
     }
 
+    static async getAllLocationIds() {
+        try {
+            const allLocationIds = await db.Location.findAll({
+                attributes: [
+                    'id',
+                    'gridID',
+                    'gridX',
+                    'gridY'
+                ]
+            });
+            return allLocationIds;
+        } catch (err) {
+            throw err;
+        }
+    }
+
     
 
     static async updateLocation(id, updateLocation) {
