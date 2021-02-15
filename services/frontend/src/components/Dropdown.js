@@ -1,30 +1,31 @@
 import React, { useState } from 'react';
 import onClickOutside from 'react-onclickoutside';
-
+import axios from 'axios';
 
 import StyledDropmenu from './styles/StyledDropmenu';
 
-function Dropdown({ test, isSelectionMade, items, multiSelect = false }) {
+
+function Dropdown({isSelectionMade, endpoint, test, items, multiSelect = false }) {
 
     const [open, setOpen] = useState(false);
-    let [selection, setSelection] = useState([]);;
+    let [selection, setSelection] = useState([]);
     const [title, setTitle] = useState([
         'Select Location....'
     ]);
     const toggle = () => setOpen(!open);
     Dropdown.handleClickOutside = () => setOpen(false);
 
-    console.log(items)
-        // if (isSelectionMade === true) {
-        //     var location = JSON.parse(localStorage.getItem('location'));
-        // }
+    // if (isSelectionMade === true) {
+    //     var location = JSON.parse(localStorage.getItem('location'));
+    // }
+
+    
 
     const handleOnClick = (item) => {
         if (!selection.length > 0) {
             if (!multiSelect) {
                 selection = [item];
-                console.log(selection)
-                if (selection.length > 0){
+                if (selection.length > 0) {
                     localStorage.setItem('location', JSON.stringify(selection[0]));
                 }
                 test();

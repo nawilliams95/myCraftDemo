@@ -2,33 +2,39 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 
+
 export default function Forecasts(props) {
+    let selectedLocation = JSON.parse(localStorage.getItem('location'));
+    let lID = selectedLocation.id;
 
-    // const [forecasts, setForecasts] = useState([]);
-    // const {endpoint} = props;
+    const {endpoint} = props
 
-
-    // let location = JSON.parse(localStorage.getItem('location'));
-    // let id = location.id
+    let [forecasts, setForecasts] = useState([]);
+    const [today, setToday] = useState();
     
-    // const getForecast = async (id) => {
-    //     try {
-    //         const response = await axios.get(`${endpoint}/forecast/${id}`);
-    //         const data = response.data;
-    //         setForecasts(data.data);
-    //         console.log(forecasts)
-    //     } catch (err) {
-    //         console.error(err);
-    //     }
-    // }
+    const getForecast = async (id) => {
+        try {
+            console.log('somthing is happening..')
+            const response = await axios.get(`${endpoint}/forecast/${id}`);
+            const data = response.data;
+            console.log(data)
+            forecasts = data.data;
+            setForecasts(forecasts)
+            setToday(forecasts[0])
+        } catch (err) {
+            console.error(err);
+        }
+    }
 
-    // useEffect(async () => {
-    //     getForecast(id);
-    // }, [])
-    
+    useEffect(async () => {
+        getForecast(lID);
+    }, [])
+
+    console.log(today)
     return (
         <>
-            <h3>for casts to go here</h3>
+            
+            <h2>weather goes here....</h2>
         </>
     )
 }

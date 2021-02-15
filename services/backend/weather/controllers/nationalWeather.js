@@ -23,25 +23,23 @@ const DELETE_URL = process.env.DELETE_URL;
 ///THE MAIN FUNCTION/ TIMER
 ///////////////////////////////
 
-const rule = new schedule.RecurrenceRule();
-rule.hour = 8;
-rule.minute = 1;
-rule.tz = 'America/New_York'
+// const rule = new schedule.RecurrenceRule();
+// rule.minute = 03;
+// rule.tz = 'America/New_York'
 
-const dailyPull = schedule.scheduleJob(rule, function() {
-    console.log('fetching new forecasts at: ' + formatAMPM());
-    getLocationIds();
-});
+// const dailyPull = schedule.scheduleJob(rule, function() {
+//     console.log('fetching new forecasts at: ' + formatAMPM());
+//     getLocationIds();
+// });
 
-const rule2 = new schedule.RecurrenceRule();
-rule.hour = 20;
-rule.minute = 1;
-rule.tz = 'America/New_York'
+// const rule2 = new schedule.RecurrenceRule();
+// rule.hour = 20;
+// rule.tz = 'America/New_York'
 
-const dailyPull2 = schedule.scheduleJob(rule2, function() {
-    console.log('fetching new forecasts at: ' + formatAMPM());
-    getLocationIds();
-});
+// const dailyPull2 = schedule.scheduleJob(rule2, function() {
+//     console.log('fetching new forecasts at: ' + formatAMPM());
+//     getLocationIds();
+// });
 
 
 
@@ -131,7 +129,7 @@ const sendForecasts = async (data, id) => {
 
         });
         const data3 = response3.data;
-        console.log(data3)
+        console.log('Success! forecasts sent')
     } catch (err) {
         console.error(err)
     }

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import LocationBar from './LocationBar';
-import Forecasts from './Forecasts';
+import Dropdown from './Dropdown';
+import Forecasts from './Forecasts'
 
 export default function GuestDash(props) {
     const [locationInfo, setLocationInfo] = useState([]);
@@ -19,6 +19,9 @@ export default function GuestDash(props) {
         }
 
     }
+
+
+
     const test = async () => {
         try {
             if (localStorage.getItem('location')) {
@@ -32,9 +35,9 @@ export default function GuestDash(props) {
             console.log("still broke", err);
 
         }
-         
+
     };
-    
+
     useEffect(async () => {
         getLocationInfo();
     }, []);
@@ -42,7 +45,6 @@ export default function GuestDash(props) {
     useEffect(() => {
         test();
     }, [isSelectionMade])
-
     return (
         <>
             <div className='wrapper'>
@@ -50,13 +52,15 @@ export default function GuestDash(props) {
                     this is the guest dash....
                 </h2>
                 <div>
-                    <LocationBar
+                    <Dropdown
                         test={test}
                         isSelectionMade={isSelectionMade}
-                        locationInfo={locationInfo} />
+                        items={locationInfo}
+                        endpoint={endpoint} />
                 </div>
-
+                <div>
                 {isSelectionMade === true && <Forecasts endpoint={endpoint} />}
+                </div>
             </div>
 
         </>
