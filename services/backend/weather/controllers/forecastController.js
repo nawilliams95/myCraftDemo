@@ -20,7 +20,7 @@ class ForecastController {
     }
 
     static async addForecast(req, res) {
-        if (!req.body.date || !req.body.lastUpdated || !req.body.day || !req.body.highTemp || !req.body.lowTemp || !req.body.shortCast || !req.body.longCast || !req.body.LocationId) {
+        if (!req.body.number || !req.body.date || !req.body.lastUpdated || !req.body.day || !req.body.highTemp || !req.body.lowTemp || !req.body.shortCast || !req.body.longCast || !req.body.LocationId) {
             util.setErr(400, 'Please provide complete details. All fields are required');
             return util.send(res);
         }

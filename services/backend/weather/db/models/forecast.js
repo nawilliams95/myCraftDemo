@@ -1,5 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
   const Forecast = sequelize.define('Forecast', {
+    number: {
+      type:DataTypes.INTEGER,
+      allowNull: false
+    },
     date: {
       type:DataTypes.STRING,
       allowNull: false

@@ -6,10 +6,13 @@ const express = require('express'); //makes use of the Express pakge (node webfr
 const app = express(); //Calling Express 
 const PORT = process.env.PORT || 8000; //crates a PORT variable andmakes its value whatever i set port to in my .env file or 8000.
 const router = require('./routes/router'); //calles the router to rerout pages to the right place
+const cors = require('cors');
 
 /////////////////////////////////////
 //MIDDLEWARE
 ////////////////////////////////////
+
+app.use(cors());
 
 app.use(express.json()); //call the built in express method for recognizing JSON objects for PUT/POST requests
 

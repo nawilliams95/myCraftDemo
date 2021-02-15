@@ -40,7 +40,10 @@ class ForecastService {
             const theLocationsForecasts =  await db.Forecast.findAll({
                 where: {
                     LocationId: Number(LocationId)
-                }
+                },
+                order: [
+                    ['number', 'ASC'],
+                ]
             });
             return theLocationsForecasts;
         } catch (err) {

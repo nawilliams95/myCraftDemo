@@ -24,8 +24,8 @@ const DELETE_URL = process.env.DELETE_URL;
 ///////////////////////////////
 
 const rule = new schedule.RecurrenceRule();
-rule.hour = 0;
-rule.minute = 2;
+rule.hour = 8;
+rule.minute = 1;
 rule.tz = 'America/New_York'
 
 const dailyPull = schedule.scheduleJob(rule, function() {
@@ -33,8 +33,15 @@ const dailyPull = schedule.scheduleJob(rule, function() {
     getLocationIds();
 });
 
+const rule2 = new schedule.RecurrenceRule();
+rule.hour = 20;
+rule.minute = 1;
+rule.tz = 'America/New_York'
 
-
+const dailyPull2 = schedule.scheduleJob(rule2, function() {
+    console.log('fetching new forecasts at: ' + formatAMPM());
+    getLocationIds();
+});
 
 
 
@@ -112,6 +119,7 @@ const sendForecasts = async (data, id) => {
     try {
         const response3 = await axios.post(forecastaApi, {
 
+            number: data.number,
             date: dateConverter(data.startTime),
             lastUpdated: formatAMPM(),
             day: data.name,

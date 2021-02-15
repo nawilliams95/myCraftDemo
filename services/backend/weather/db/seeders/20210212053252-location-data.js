@@ -20,7 +20,7 @@ module.exports = {
       timeZone: 'Alaska Standard Time(AKST) [GMT-9]',
       lat: 58.3019,
       long: -134.4197,
-      gridID: 'AKJ',
+      gridID: 'AJK',
       gridX: 195,
       gridY: 164,
       createdAt: new Date(),
