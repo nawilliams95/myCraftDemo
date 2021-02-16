@@ -11,6 +11,8 @@ const AppHeader = styled.h1`
   font-weight: 400;
   color: #ffffff;
   transition: 0.3s 1.4s;
+  opacity: ${({ showLabel }) => (showLabel ? 1 : 0)};
+
   
   ${({ secondary }) =>
     secondary &&

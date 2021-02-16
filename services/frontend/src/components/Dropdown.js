@@ -5,7 +5,7 @@ import axios from 'axios';
 import StyledDropmenu from './styles/StyledDropmenu';
 
 
-function Dropdown({isSelectionMade, endpoint, test, items, multiSelect = false }) {
+function Dropdown({ setForecasts, setToday, setTenDay, isSelectionMade, showResult, endpoint, test, items, multiSelect = false }) {
 
     const [open, setOpen] = useState(false);
     let [selection, setSelection] = useState([]);
@@ -18,8 +18,27 @@ function Dropdown({isSelectionMade, endpoint, test, items, multiSelect = false }
     // if (isSelectionMade === true) {
     //     var location = JSON.parse(localStorage.getItem('location'));
     // }
+    const makeTenDay = (data) => {
+        const exceptIndex = 0;
+        const filteredItems = data.filter((value, index) => exceptIndex !== index);
+        return filteredItems;
+    };
 
-    
+    const getForecast = async (id) => {
+        try {
+            console.log('somthing is happening..')
+            const response = await axios.get(`${endpoint}/forecast/${id}`);
+            const data = response.data;
+            const forecast = data.data;
+            setForecasts(forecast);
+            setToday(forecast[0]);
+            let temp = makeTenDay(forecast);
+            setTenDay(temp);
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
 
     const handleOnClick = (item) => {
         if (!selection.length > 0) {
@@ -31,7 +50,9 @@ function Dropdown({isSelectionMade, endpoint, test, items, multiSelect = false }
                 test();
                 console.log(localStorage.location);
                 let location = JSON.parse(localStorage.getItem('location'));
+                let locationID = location.id
                 setTitle(`${location.cityName}, ${location.state}`);
+                getForecast(locationID);
             } else if (multiSelect) {
                 setSelection([...selection, item]);
             }
@@ -57,7 +78,7 @@ function Dropdown({isSelectionMade, endpoint, test, items, multiSelect = false }
 
     return (
         <>
-            <StyledDropmenu>
+            <StyledDropmenu showResult={showResult}>
                 <div
                     tabIndex={0}
                     className='dd-header'

@@ -24,7 +24,7 @@ const DELETE_URL = process.env.DELETE_URL;
 ///////////////////////////////
 
 // const rule = new schedule.RecurrenceRule();
-// rule.minute = 03;
+// rule.minute = 48;
 // rule.tz = 'America/New_York'
 
 // const dailyPull = schedule.scheduleJob(rule, function() {
