@@ -11,6 +11,8 @@ import {
   faSmog,
   faCloudSun
 } from '@fortawesome/free-solid-svg-icons';
+import Carousel, { slidesToShowPlugin } from '@brainhubeu/react-carousel';
+import '@brainhubeu/react-carousel/lib/style.css';
 
 import device from '../responsive/Device';
 import TenDayCast from './TenDayCast'; //TenDayCast
@@ -43,7 +45,7 @@ const WeatherDetail = styled.div`
 const ForecastWrapper = styled.div`
   flex-basis: 100%;
   margin: 20px 0;
-  overflow: hidden;
+  overflow-y: hidden;
 `;
 
 
@@ -163,7 +165,9 @@ console.log(today)
             </WeatherDetailsWrapper>
             <ForecastWrapper>
                 <MediumLabel weight='400'>10-Day Forecast</MediumLabel>
-                <Forecast>{tenDayResult}</Forecast>
+                <Forecast>
+                    {tenDayResult}
+                </Forecast>
             </ForecastWrapper>
         </ForecastContainer>
     )

@@ -7,6 +7,7 @@ const TenDayForecastWrapper = styled.div`
   padding: 10px;
   margin: 0 5px;
   border-radius: 5px;
+  overflow-y: hidden;
   background-color: rgba(255, 255, 255, 0.2);
   &:first-child {
     margin-left: 0;

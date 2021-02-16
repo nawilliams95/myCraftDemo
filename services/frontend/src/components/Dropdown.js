@@ -74,8 +74,6 @@ function Dropdown({ setForecasts, setToday, setTenDay, isSelectionMade, showResu
     }
 
 
-
-
     return (
         <>
             <StyledDropmenu showResult={showResult}>
@@ -90,7 +88,7 @@ function Dropdown({ setForecasts, setToday, setTenDay, isSelectionMade, showResu
                         <p className='dd-header__title--bold'>{title}</p>
                     </div>
                     <div className='dd-header_action'>
-                        <p>{open ? 'Close' : 'Open'}</p>
+                        <p>{open ? '▲' : '▼'}</p>
                     </div>
                 </div>
                 {open && (
